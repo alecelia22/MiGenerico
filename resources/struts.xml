@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+
+	<!--  extends="struts-default" -->
+	<package name="default" extends="json-default"  namespace="/">
+		<!-- Creando mi interceptor -->
+		<interceptors>
+			<interceptor name="sessionInterceptor" class="ar.com.generico.interceptor.SessionInterceptor" />
+			<interceptor-stack name="sessionStack">
+				<interceptor-ref name="sessionInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+
+        <!-- interceptor de todos  -->
+        <default-interceptor-ref name="sessionStack" />
+
+		<!-- Salida global, en caso de un acceso sin login -->
+		<global-results>
+			<result name="loginRedirect" type="redirect">/login.action</result>
+        </global-results>
+
+
+		<!-- Actions -->
+		<action name="login" method="authenticate" class="ar.com.generico.action.LoginAction">
+			<result name="success">Generico/Principal.jsp</result>
+			<result name="error">Login.jsp</result>
+		</action>
+		<action name="inicioSumar" method="inicioSumar" class="ar.com.generico.action.RegistrarImportesAction">
+			<result name="success">Inicio.jsp</result>
+		</action>
+		<action name="busqueda" method="buscarSocio" class="ar.com.generico.action.RegistrarImportesAction">
+			<result name="success">Inicio.jsp</result>
+			<result type="json">Inicio.jsp</result>
+		</action>
+		<action name="sumarPuntos" method="sumarPuntos" class="ar.com.generico.action.RegistrarImportesAction">
+			<result name="success">Inicio.jsp</result>
+			<result type="json">Inicio.jsp</result>
+		</action>
+	</package>
+	
+	<package name="helloworld" extends="struts-default">
+        <default-action-ref name="index" />
+      	<action name="hello" class="com.tutorialspoint.struts2.HelloWorldAction" method="execute">
+        	<result name="success">/HelloWorld.jsp</result>
+    	</action>
+	</package>
+</struts>

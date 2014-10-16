@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="ar.com.generico.entidades.Socio" table="Socio">
+
+        <id name="id" column="id">
+            <generator class="native" />
+        </id>
+
+        <property name="nombre">
+            <column name="nombre" not-null="true" length="45" />
+        </property>
+
+        <property name="apellido">
+            <column name="apellido" not-null="true" length="45" />
+        </property>
+
+		<property name="direccion">
+			<column name="direccion" not-null="true" length="45" />
+        </property>
+		
+		<property name="localidad">
+            <column name="localidad" not-null="true" length="45" />
+        </property>
+
+		<property name="dni">
+            <column name="dni" not-null="true" length="11" />
+        </property>
+
+		<property name="puntos">
+            <column name="puntos" not-null="true" length="12" />
+        </property>
+        
+    </class>
+</hibernate-mapping>
